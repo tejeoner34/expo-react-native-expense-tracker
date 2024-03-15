@@ -1,5 +1,6 @@
 {
   "expo": {
+    "backgroundColor": "#27127B",
     "name": "expense-tracker",
     "slug": "expense-tracker",
     "version": "1.0.0",
