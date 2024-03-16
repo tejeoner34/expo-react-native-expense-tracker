@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-const ExpensesContext = createContext({
+export const ExpensesContext = createContext({
   expenses: [],
   addExpense: () => {},
   removeExpense: () => {},
@@ -10,10 +10,11 @@ export function ExpensesContextProvider({ children }) {
   const [expenses, setExpenses] = useState([]);
 
   function addExpense(expenseData) {
-    setExpenses((oldValue) => [...oldValue, expenseData]);
+    setExpenses((oldValue) => [expenseData, ...oldValue]);
   }
 
   function removeExpense(id) {
+    console.log(id);
     setExpenses((oldValue) => oldValue.filter((expense) => expense.id !== id));
   }
 

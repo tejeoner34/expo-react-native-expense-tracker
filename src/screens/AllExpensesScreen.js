@@ -1,24 +1,24 @@
-import { useContext } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { useContext } from 'react';
 import { colors } from '../constants/colors';
-import ExpenseItem from '../components/ExpenseItem';
 import Subheader from '../components/Subheader';
+import ExpenseItem from '../components/ExpenseItem';
 import { ExpensesContext } from '../store/expensesContext';
 import ExpensesList from '../components/ExpensesList';
 
-export default function RecentsScreen({ navigation }) {
+export default function AllExpensesScreen({ navigation }) {
   const { expenses } = useContext(ExpensesContext);
+
   const handleExpenseClick = (expense) => {
     navigation.navigate('RemoveExpense', {
       expenseId: expense.id,
     });
   };
-  const lastWeekExpenses = () =>
-    expenses.filter((expense) => expense.date > Date.now() - 7 * 24 * 60 * 60 * 1000);
+
   return (
     <View style={styles.container}>
-      <Subheader title="Last 7 days" value="test" />
-      <ExpensesList list={lastWeekExpenses()} onItemPress={handleExpenseClick} />
+      <Subheader title="All expenses" value="test" />
+      <ExpensesList list={expenses} onItemPress={handleExpenseClick} />
     </View>
   );
 }
