@@ -1,24 +1,11 @@
-import { FlatList, StyleSheet, View } from 'react-native';
-import { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { colors } from '../constants/colors';
-import Subheader from '../components/Subheader';
-import ExpenseItem from '../components/ExpenseItem';
-import { ExpensesContext } from '../store/expensesContext';
-import ExpensesList from '../components/ExpensesList';
+import ExpensesSummary from '../components/ExpensesSummary';
 
 export default function AllExpensesScreen({ navigation }) {
-  const { expenses } = useContext(ExpensesContext);
-
-  const handleExpenseClick = (expense) => {
-    navigation.navigate('RemoveExpense', {
-      expenseId: expense.id,
-    });
-  };
-
   return (
     <View style={styles.container}>
-      <Subheader title="All expenses" value="test" />
-      <ExpensesList list={expenses} onItemPress={handleExpenseClick} />
+      <ExpensesSummary navigation={navigation} />
     </View>
   );
 }

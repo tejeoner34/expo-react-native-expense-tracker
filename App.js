@@ -43,8 +43,20 @@ function StackScreens() {
         name="Root"
         component={TabsScreens}
       />
-      <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
-      <Stack.Screen name="RemoveExpense" component={RemoveExpenseScreen} />
+      <Stack.Screen
+        name="AddExpense"
+        component={AddExpenseScreen}
+        options={{
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="RemoveExpense"
+        component={RemoveExpenseScreen}
+        options={{
+          presentation: 'modal',
+        }}
+      />
     </Stack.Navigator>
   );
 }
