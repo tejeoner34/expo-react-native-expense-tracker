@@ -7,7 +7,8 @@ import RecentsScreen from './src/screens/RecentsScreen';
 import { colors } from './src/constants/colors';
 import AllExpensesScreen from './src/screens/AllExpensesScreen';
 import AddExpenseScreen from './src/screens/AddExpenseScreen';
-import RemoveExpenseScreen from './src/screens/RemoveExpenseScreen';
+import UpdateExpenseScreen from './src/screens/UpdateExpenseScreen';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,11 +26,14 @@ const tabIconConfig = ({ color, size, name }) => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <ExpensesContextProvider>
-        <StackScreens />
-      </ExpensesContextProvider>
-    </NavigationContainer>
+    <>
+      <StatusBar style="light" />
+      <NavigationContainer>
+        <ExpensesContextProvider>
+          <StackScreens />
+        </ExpensesContextProvider>
+      </NavigationContainer>
+    </>
   );
 }
 
@@ -47,13 +51,15 @@ function StackScreens() {
         name="AddExpense"
         component={AddExpenseScreen}
         options={{
+          title: 'Add Expense',
           presentation: 'modal',
         }}
       />
       <Stack.Screen
-        name="RemoveExpense"
-        component={RemoveExpenseScreen}
+        name="UpdateExpense"
+        component={UpdateExpenseScreen}
         options={{
+          title: 'Update Expense',
           presentation: 'modal',
         }}
       />

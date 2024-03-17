@@ -1,16 +1,11 @@
-import { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ExpensesContext } from '../store/expensesContext';
 import Subheader from './Subheader';
 import ExpensesList from './ExpensesList';
 import { colors } from '../constants/colors';
 
-export default function ExpensesSummary({ period, navigation }) {
-  const { getPeriodExpenses } = useContext(ExpensesContext);
-  const expenses = getPeriodExpenses({ days: period });
-
+export default function ExpensesSummary({ expenses, period, navigation }) {
   const handleExpenseClick = (expense) => {
-    navigation.navigate('RemoveExpense', {
+    navigation.navigate('UpdateExpense', {
       expenseId: expense.id,
     });
   };

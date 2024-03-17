@@ -10,10 +10,15 @@ export default function AddExpenseScreen({ navigation }) {
     navigation.goBack();
   };
   return (
-    <View>
+    <View style={styles.container}>
       <AddExpenseForm onCancel={() => navigation.goBack()} onConfirm={handleAddExpense} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+});
