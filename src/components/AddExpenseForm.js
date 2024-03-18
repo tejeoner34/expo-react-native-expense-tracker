@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../constants/colors';
 import Expense from '../../models/expense';
 import CustomInput from './CustomInput';
@@ -18,12 +18,24 @@ export default function AddExpenseForm({ onCancel, onConfirm, expense }) {
     }));
   };
 
+  const isInvalidForm = (expenseData) => {
+    return (
+      expenseData.amount < 0 ||
+      expenseData.title.trim().length === 0 ||
+      expenseData.date === 'Invalid dateTime'
+    );
+  };
+
   const onSubmit = () => {
     const expense = new Expense({
       amount: Number(formData.amount),
       title: formData.title,
       date: new Date(formData.date),
     });
+    if (isInvalidForm(expense)) {
+      Alert.alert('Invalid form data', 'Please check your inputs');
+      return;
+    }
     onConfirm(expense);
   };
 
