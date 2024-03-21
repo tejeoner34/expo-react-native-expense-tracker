@@ -1,9 +1,9 @@
 class Expense {
-  constructor({ amount, date, title }) {
+  constructor({ amount, date, title, id }) {
     this.amount = amount;
     this.date = date;
     this.title = title;
-    this.id = Math.random();
+    this.id = id;
   }
 }
 

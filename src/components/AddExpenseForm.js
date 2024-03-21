@@ -30,7 +30,7 @@ export default function AddExpenseForm({ onCancel, onConfirm, expense }) {
     const expense = new Expense({
       amount: Number(formData.amount),
       title: formData.title,
-      date: new Date(formData.date),
+      date: formData.date ? new Date(formData.date) : new Date(),
     });
     if (isInvalidForm(expense)) {
       Alert.alert('Invalid form data', 'Please check your inputs');
