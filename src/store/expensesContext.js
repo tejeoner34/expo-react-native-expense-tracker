@@ -1,5 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
-import { expensesMock } from '../../data/expensesData';
+import { createContext } from 'react';
 import { useExpenseService } from '../hooks/useExpenseService';
 
 export const ExpensesContext = createContext({
@@ -8,32 +7,28 @@ export const ExpensesContext = createContext({
   removeExpense: (id) => {},
   updateExpense: ({ id, newData }) => {},
   getPeriodExpenses: ({ days }) => {},
+  isLoading: false,
 });
 
 export function ExpensesContextProvider({ children }) {
   const {
     storeExpense,
-    getOrderedExpenses,
     updateExpense: updateExpenseService,
     deleteExpense,
+    isLoading,
+    expenses,
   } = useExpenseService();
-  const [expenses, setExpenses] = useState([]);
 
-  async function addExpense(expenseData) {
-    const newExpenseId = await storeExpense(expenseData);
-    setExpenses((oldValue) => [{ ...expenseData, id: newExpenseId }, ...oldValue]);
+  function addExpense(expenseData) {
+    storeExpense(expenseData);
   }
 
   function removeExpense(id) {
     deleteExpense({ id });
-    setExpenses((oldValue) => oldValue.filter((expense) => expense.id !== id));
   }
 
   function updateExpense({ id, newData }) {
     updateExpenseService({ id, newData });
-    const expenseIndex = expenses.findIndex((expense) => expense.id === id);
-    expenses[expenseIndex] = { ...expenses[expenseIndex], ...newData };
-    setExpenses([...expenses]);
   }
 
   function getPeriodExpenses({ days }) {
@@ -48,14 +43,8 @@ export function ExpensesContextProvider({ children }) {
     removeExpense,
     updateExpense,
     getPeriodExpenses,
+    isLoading,
   };
-
-  useEffect(() => {
-    getOrderedExpenses().then((expenses) => {
-      console.log(expenses);
-      setExpenses([...expenses]);
-    });
-  }, []);
 
   return <ExpensesContext.Provider value={value}>{children}</ExpensesContext.Provider>;
 }
